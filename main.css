@@ -29,6 +29,7 @@ body{
     opacity: 0;
     color:white;
     padding: 1rem;
+    
     animation-name: commingText;
     animation-fill-mode: forwards;
     animation-timing-function: ease-in-out;
@@ -60,6 +61,67 @@ body{
     width: 80%;
     object-fit: cover;
 }
+/*BARRA DE NAVEGACION*/
+.navigation{
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    min-width: 100vw;
+    padding: 1rem;
+}
+.logo{
+    display: flex;
+    align-items: center;
+    color: white;
+    text-transform: uppercase;
+    flex-basis: 0;
+    flex-grow: 1;
+    
+}
+.logo>h3{
+    font-weight: 500;
+}
+.roseText{
+    color:#ff007a;
+}
+.logo>img{
+    width: 56px;
+    height: 56px;
+}
+.linksContainer{
+    display: flex;
+    justify-content: space-evenly;
+    flex-basis: 0;
+    flex-grow: 1;
+    padding-right:2rem ;
+}
+.navigation>ul>li{
+    list-style: none;
+}
+.link{
+    text-decoration: none;
+    color:white;
+    font-weight: 500;
+    text-transform: uppercase;
+    position: relative;
+}
+.link:before{
+    content: ' ';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background-color: rgba(255, 255, 255, 0);
+    clip-path: inset(0 100% 0 0);
+    transition-property: clip-path background-color;
+    transition-duration: .5s;
+    transition-timing-function: ease-in-out;
+}
+.link:hover:before{
+    background-color: rgba(255, 255, 255, 1);
+    clip-path: inset(0 0 0 0);
+}
 
 @media only screen and (min-width: 640px) {
     .hero{
@@ -81,12 +143,16 @@ body{
         background-size: 70%;
         background-repeat: no-repeat;
     }
+    
 
 }
 @media only screen and (min-width: 900px){
     
     .heroImage>img{
         width: 70%;
+    }
+    .heroMessage{
+        margin-left: 4rem;
     }
     .heroMessage>h1{
         font-size: 3.5rem;
