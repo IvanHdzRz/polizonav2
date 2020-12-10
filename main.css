@@ -1,0 +1,106 @@
+body{
+    min-width: 100vw;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+}
+.hero{
+    min-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(to left top, #150069, #150069, #150069, #150069, #150069, #35006e, #4c0073, #600077, #8b007e, #b40081, #db007f, #ff007a);
+    
+}
+.heroMessage{
+    flex-basis: 0;
+    flex-grow: 1;
+}
+.heroImage{
+    flex-basis: 0;
+    flex-grow: 2;
+}
+.heroMessage{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-transform: uppercase;
+    opacity: 0;
+    color:white;
+    padding: 1rem;
+    animation-name: commingText;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+    animation-duration: 2s;
+    animation-delay: .3s;
+    
+}
+.heroMessage>h1{
+    
+    font-size: 2.8rem;
+    font-weight: 200;
+}
+.boldText{
+    font-weight: 600;
+}
+.heroParagraph{
+    max-width: 25rem;
+    font-weight: 200;
+    margin: 0;
+    text-transform: lowercase;
+}
+.heroImage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.heroImage>img{
+    width: 80%;
+    object-fit: cover;
+}
+
+@media only screen and (min-width: 640px) {
+    .hero{
+        flex-direction: row-reverse;
+        background: 
+        radial-gradient(31.4% 55.3% at 77.54% 61%, rgba(255, 238, 248, 0.3) 0%, rgba(255, 255, 255, 0.3) 10.94%, rgba(255, 255, 255, 0.3) 21.35%, rgba(255, 255, 255, 0.3) 29.69%, rgba(255, 255, 255, 0.3) 39.06%, rgba(255, 255, 255, 0) 100%), 
+        conic-gradient(from 98.06deg at 82.57% 47.07%, rgba(255, 255, 255, 0) 0deg, rgba(0, 3, 16, 0.03) 360deg), 
+        conic-gradient(from -19.53deg at 74.3% 33.98%, rgba(0, 194, 255, 0.17) 0deg, rgba(202, 169, 244, 0) 360deg), 
+        linear-gradient(241.14deg, #001AFF -14.01%, rgba(0, 37, 132, 0) 43.6%), 
+        conic-gradient(from 101.05deg at 38.16% 82.88%, rgba(81, 140, 253, 0.39) 0deg, rgba(149, 128, 148, 0.0671093) 233.58deg, rgba(190, 178, 190, 0.0410237) 282.56deg, rgba(255, 255, 255, 0) 360deg), 
+        radial-gradient(67.87% 130.47% at 68.16% 59.14%, #FF007A 0%, #150069 100%);
+    
+    }
+    .heroImage>img{
+        width: 100%;
+        background-image: url('./assets/nodes.png');
+        background-position-y: top;
+        background-position-x: right;
+        background-size: 70%;
+        background-repeat: no-repeat;
+    }
+
+}
+@media only screen and (min-width: 900px){
+    
+    .heroImage>img{
+        width: 70%;
+    }
+    .heroMessage>h1{
+        font-size: 3.5rem;
+    }
+}
+
+@keyframes commingText{
+    from{
+        opacity: 0;
+        transform: translateY(-5rem);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
