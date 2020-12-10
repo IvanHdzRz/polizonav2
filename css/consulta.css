@@ -1,0 +1,25 @@
+body{
+    
+    font-family: 'Poppins', sans-serif;
+    min-width: 100vw;
+    min-height: 100vh;
+    background-color: #020718;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+.title{
+    margin: 1rem;
+    padding: .5rem;
+    color: white;
+    border-left: 10px solid #0FAC00;
+}
+#codeEditor{
+    padding: 1rem;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}

@@ -1,0 +1,296 @@
+:root{
+    --purple:#2C0E6B;
+    --rose:rgba(255,0,200,0.3);
+}
+html {
+    scroll-behavior: smooth;
+  }
+body{
+    min-width: 100vw;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+}
+.hero{
+    min-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(to left top, #150069, #150069, #150069, #150069, #150069, #35006e, #4c0073, #600077, #8b007e, #b40081, #db007f, #ff007a);
+    position: relative;   
+}
+.wave{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.heroMessage{
+    flex-basis: 0;
+    flex-grow: 1;
+}
+.heroImage{
+    flex-basis: 0;
+    flex-grow: 2;
+}
+.heroMessage{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-transform: uppercase;
+    opacity: 0;
+    color:white;
+    padding: 1rem;
+    padding-bottom: 3rem;
+    animation-name: commingText;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+    animation-duration: 2s;
+    animation-delay: .3s;
+    
+}
+.heroMessage>h1{
+    
+    font-size: 2.8rem;
+    font-weight: 200;
+}
+.boldText{
+    font-weight: 600;
+}
+.heroParagraph{
+    max-width: 25rem;
+    font-weight: 200;
+    margin: 0;
+    text-transform: lowercase;
+}
+.heroImage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.heroImage>img{
+    width: 80%;
+    object-fit: cover;
+}
+/*BARRA DE NAVEGACION*/
+.navigation{
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    min-width: 100vw;
+    padding: 1rem;
+    padding-bottom: .5rem;
+    z-index: 10;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+.navigation-colored{
+    background-color: rgba(0,0,0,1);
+}
+.logo{
+    display: flex;
+    align-items: center;
+    color: white;
+    text-transform: uppercase;
+    flex-basis: 0;
+    flex-grow: 1;
+    
+}
+.logo>h3{
+    font-weight: 500;
+    margin: 0;
+}
+.roseText{
+    color:#ff007a;
+}
+.logo>img{
+    width: 48px;
+    height: 48px;
+}
+.linksContainer{
+    display: none;
+}
+.navigation>ul>li{
+    list-style: none;
+}
+.link{
+    text-decoration: none;
+    color:white;
+    font-weight: 500;
+    text-transform: uppercase;
+    position: relative;
+    margin: 0;
+}
+.link:before{
+    content: ' ';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background-color: rgba(255, 255, 255, 0);
+    clip-path: inset(0 100% 0 0);
+    transition-property: clip-path background-color;
+    transition-duration: .5s;
+    transition-timing-function: ease-in-out;
+}
+.link:hover:before{
+    background-color: rgba(255, 255, 255, 1);
+    clip-path: inset(0 0 0 0);
+}
+
+/*soluciones*/
+
+.solutions{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.solutionsTitle{
+    font-size: 2.5rem;
+    color:var(--purple);
+    text-transform: uppercase;
+    margin-bottom: 5rem;
+    text-align: center;
+}
+.solutionCard{
+    display:grid;
+    grid-template-columns: repeat(12,1fr);
+    grid-template-rows:repeat(3,auto);
+    font-size: 1rem;
+    max-width: 95vw;
+    gap: .5rem;
+    border-radius: 10px;
+    margin: 1rem;
+    transition: all .3s;
+}
+.solutionImg{
+    grid-column: 1 / 6;
+    grid-row: 1 / 4;
+    width: 100%;
+   /*  height: 100%;
+    object-fit: cover; */
+    align-self: center;
+}
+.solutionTitle{
+    grid-column: 6/13;
+    grid-row: 1/2;
+    
+    font-size: 1em;
+    margin: 0;
+    padding-top: 1rem;
+    color:var(--purple);
+    text-transform: uppercase;
+    font-weight: 600;
+    
+}
+.solutionExplain{
+    grid-column: 6/13;
+    grid-row: 2/3;
+    font-weight: 200;
+    font-size: .8em;
+    color: #5B5071;
+}
+.solutionLink{
+    text-decoration: none;
+    grid-column: 6/12;
+    grid-row: 3/4;
+    background-image: linear-gradient(to right, #5427b2, #8424bc, #af1dc2, #d811c6, #ff00c7);
+    color:white;
+    border:none;
+    border-radius: 20px;
+    justify-self: flex-start;
+    align-self: flex-start;
+    font-size: .8em;
+    padding: .5em;
+    width: 10em;
+    text-align: center;
+    transition-property: box-shadow;
+    transition-duration: .5s;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+.solutionLink:hover{
+    box-shadow: 
+        0 0 10px var(--rose),
+        0 0 20px var(--rose),
+        0 0 30px var(--rose),
+        0 0 40px var(--rose),
+        0 0 50px var(--rose),
+        0 0 60px var(--rose),
+        0 0 70px var(--rose);
+}
+
+@media only screen and (min-width: 640px) {
+    .hero{
+        flex-direction: row-reverse;
+        background: 
+        radial-gradient(31.4% 55.3% at 77.54% 61%, rgba(255, 238, 248, 0.3) 0%, rgba(255, 255, 255, 0.3) 10.94%, rgba(255, 255, 255, 0.3) 21.35%, rgba(255, 255, 255, 0.3) 29.69%, rgba(255, 255, 255, 0.3) 39.06%, rgba(255, 255, 255, 0) 100%), 
+        conic-gradient(from 98.06deg at 82.57% 47.07%, rgba(255, 255, 255, 0) 0deg, rgba(0, 3, 16, 0.03) 360deg), 
+        conic-gradient(from -19.53deg at 74.3% 33.98%, rgba(0, 194, 255, 0.17) 0deg, rgba(202, 169, 244, 0) 360deg), 
+        linear-gradient(241.14deg, #001AFF -14.01%, rgba(0, 37, 132, 0) 43.6%), 
+        conic-gradient(from 101.05deg at 38.16% 82.88%, rgba(81, 140, 253, 0.39) 0deg, rgba(149, 128, 148, 0.0671093) 233.58deg, rgba(190, 178, 190, 0.0410237) 282.56deg, rgba(255, 255, 255, 0) 360deg), 
+        radial-gradient(67.87% 130.47% at 68.16% 59.14%, #FF007A 0%, #150069 100%);
+    
+    }
+    .heroImage>img{
+        width: 100%;
+        background-image: url('./assets/nodes.png');
+        background-position-y: top;
+        background-position-x: right;
+        background-size: 70%;
+        background-repeat: no-repeat;
+    }
+    .linksContainer{
+        display: flex;
+        justify-content: space-evenly;
+        flex-basis: 0;
+        flex-grow: 1;
+        padding-right:2rem ;
+        margin: 0;
+        align-items: center;
+    }
+    .solutionCard{
+        font-size: 1.3rem;
+        max-width: 90vw;
+    }
+    
+    .solutionTitle{
+        font-size: 1.5em;
+    }
+
+}
+@media only screen and (min-width: 900px){
+    
+    .heroImage>img{
+        width: 70%;
+    }
+    .heroMessage{
+        margin-left: 4rem;
+    }
+    .heroMessage>h1{
+        font-size: 3.5rem;
+    }
+    .solutionCard{
+        
+        max-width: 70vw;
+    }
+    .solutionExplain{
+        font-size: 1.1em;
+    }
+}
+
+@keyframes commingText{
+    from{
+        opacity: 0;
+        transform: translateY(-5rem);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}

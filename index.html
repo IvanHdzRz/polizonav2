@@ -6,17 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="preconnect" href="https://fonts.gstatic.com"> 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="main.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="./css/main.css">
+    <title>Ivan Hernandez</title>
 </head>
 <body>
-    <nav class="navigation">
+    <nav class="navigation" id="navigation">
         <div class="logo">
             <img src="./assets/logo.png" alt="logo"/>
             <h3><span class="roseText">Ingenieria</span> del conocimiento</h3>
         </div>
         <ul class="linksContainer">
-            <li><a class="link" href="#" >Herramientas </a></li>
+            <li><a class="link" href="#solutions" >Herramientas </a></li>
             <li><a class="link" href="#">Contacto</a></li>
             <li><a class="link" href="#">Codigo fuente</a></li>
         </ul>
@@ -29,6 +30,19 @@
             <h1><span class="boldText">Inteligencia</span><br> de negocios</h1>
             <p class="heroParagraph">Herramientas diseñadas para la clase de ingenieria del conocimiento con aplicaciones en inteligencia de negocios </p>
         </div>
+        <svg class="wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#fff" fill-opacity="1" d="M0,256L120,261.3C240,267,480,277,720,261.3C960,245,1200,203,1320,181.3L1440,160L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></svg>
     </div>
+    <section class="solutions" id="solutions">
+        <h2 class="solutionsTitle">Nuestras soluciones</h2>
+        <div class="solutionsContainer">
+            <div class="solutionCard animate__animated animate__fadeInUp">
+                <img src="assets/fintech.png" alt="solutionImg" class="solutionImg"/>
+                <h3 class="solutionTitle">Indicadores financieros de manera sencilla</h3>
+                <p class="solutionExplain">Calcule los costos de los insumos utilizados para la produccion de sus productos con un solo click</p>
+                <a href="./consulta.html"" class="solutionLink">Probar ahora</a>
+            </div>
+        </div>
+    </section>
+    <script src="./js/navChangeColor.js" ></script>
 </body>
 </html>
