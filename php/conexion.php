@@ -16,6 +16,7 @@
             $tempArray = $registro;
             array_push($responce, $tempArray);
         }
+    header('Content-Type: application/json');
     echo json_encode($responce);
     }else{
         echo json_encode("error");
