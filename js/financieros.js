@@ -28,9 +28,9 @@ const fetchData= async()=>{
                     Generales
                 </h2>
                 <div class="cardContainer">
-                    ${cardFinantial("materia prima en almacen",`$ ${materiaPrimaTotal}`,"../assets/tape 1.png")}
-                    ${cardFinantial("capacidad de produccion",`${Math.floor (capacidadProduccion)} pzs`,"../assets/manufacture 1.png")}
-                    ${cardFinantial("Costo de materia prima directa por unidad producida",`$ ${Math.round(constoProduccionUnitario)}`,"../assets/competition 1.png")}
+                    ${cardFinantial("materia prima en almacen",`$ ${materiaPrimaTotal}`,"http://polizona.com/mercado/22/assets/tape 1.png")}
+                    ${cardFinantial("capacidad de produccion",`${Math.floor (capacidadProduccion)} pzs`,"http://polizona.com/mercado/22/assets/manufacture 1.png")}
+                    ${cardFinantial("Costo de materia prima directa por unidad producida",`$ ${Math.round(constoProduccionUnitario)}`,"http://polizona.com/mercado/22/assets/competition 1.png")}
                 </div>
                 <h2 class="sectionTitle">
                     Raw data
