@@ -1,0 +1,186 @@
+:root{
+    --lightPurple: #7444B1;
+    --palePurple: #F5F3FF;
+    --darkPurple:#371F55;
+}
+html {
+    box-sizing: border-box;
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+body{
+    min-width: 100vw;
+    min-height: 100vh;
+    background-color: var(--palePurple);
+    margin: 0;
+    padding: 2rem;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+}
+.dasboardTitle{
+    text-transform: uppercase;
+    font-size: 2.5rem;
+    margin: 0;
+    color: #4F4F4F;
+    margin-bottom: 0;
+}
+#loader{
+    min-width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+    flex-direction: column;
+}
+.loadingMessage{
+    text-transform: uppercase;
+    font-weight: 300;
+    animation-name: banish;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+.spinner{
+    width: 20em;
+    height: 20em;
+/*     clip-path: polygon(100% 0, 50% 50%, 100% 100%, 0 100%, 0 0);
+ */    border-radius: 50%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation-name: spin;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    position: relative;
+    
+}
+.spinner::after{
+    content: ' ';
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(116,68,177,1) 0%, rgba(2,0,36,0) 100%);
+    position: absolute;
+    left: 0;
+    border-bottom-left-radius: 10em;
+    border-top-left-radius: 10em;
+}
+.spinner:before{
+    content: ' ' ;
+    height: 2.1rem;
+    width: 2.1rem;
+    border-radius: 50%;
+    position: absolute;
+    right: 50%;
+    top: 0;
+    transform: translate(50%, -0.5rem);
+    background-color: var(--lightPurple);
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    z-index: 20;
+    -webkit-transform: translate(50%, -0.5rem);
+    -moz-transform: translate(50%, -0.5rem);
+    -ms-transform: translate(50%, -0.5rem);
+    -o-transform: translate(50%, -0.5rem);
+}
+.innerSpinner{
+    height: 18em;
+    width: 18em;
+    background-color: var(--palePurple);
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    z-index: 10;
+}
+.empresaInfo{
+    display: flex;
+    width: 100vw;
+    justify-content: flex-start;
+    align-items: center;
+}
+.empresaInfo>h3{
+    margin: 0;
+    margin-right:3rem;
+    font-weight: 400;
+    font-size: 1.3rem;
+    color: var(--darkPurple);
+    text-transform: capitalize;
+}
+
+.industriaName{
+    padding: .2rem 2rem;
+    background-color: var(--lightPurple);
+    border-radius: 1.5rem;
+    color: white;
+}
+.sectionTitle{
+    color:var(--darkPurple);
+    font-size: 2rem;
+}
+.cardContainer{
+    display: flex;
+    flex-wrap: wrap;
+}
+.cardIndicator{
+    background-color: white;
+    padding: 1rem;
+    border-radius: .5rem;
+    display: grid;
+    grid-template-columns: repeat(2,auto);
+    grid-template-rows: repeat(2,auto);
+    gap: 1rem;
+    max-width: 20rem;
+    width: 90vw;
+    box-shadow: -4px 4px 5px rgba(116,68,177,0.2);
+    margin: 1rem;
+}
+.cardTitle{
+    color: var(--lightPurple);
+    grid-row: 1/2;
+    grid-column: 1/3;
+    margin: 0;
+}
+.cardIcon{
+    grid-row: 2/3;
+    grid-column: 1/2;
+}
+.cardValue{
+    grid-row: 2/3;
+    grid-column: 2/3;
+    font-size: 2.5rem;
+    margin: 0;
+    
+}
+@keyframes spin{
+    from{
+        transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+}
+}
+@keyframes banish{
+    0%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
