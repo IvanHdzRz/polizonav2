@@ -32,10 +32,25 @@ const fetchData= async()=>{
                     ${cardFinantial("capacidad de produccion",`${Math.floor (capacidadProduccion)} pzs`,"../assets/manufacture 1.png")}
                     ${cardFinantial("Costo de materia prima directa por unidad producida",`$ ${Math.round(constoProduccionUnitario)}`,"../assets/competition 1.png")}
                 </div>
-                
+                <h2 class="sectionTitle">
+                    Raw data
+                </h2>
+                <div id="codeEditor">
 
+                </div>
             </section>
         `;
+
+        const codeEditorContainer=document.getElementById("codeEditor");
+        const codeEditor=CodeMirror(codeEditorContainer,{
+        
+            value:JSON.stringify(data,null,'\t'),
+            
+            theme:"seti",
+            lineNumbers:true,
+            styleActiveLine:true,
+           
+        });
 
     }catch(e){alert}
     
