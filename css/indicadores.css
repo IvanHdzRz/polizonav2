@@ -170,9 +170,11 @@ body{
     display: flex;
     flex-direction: column;
     max-width: 45rem;
+    width: 95vw;
     border-radius: .5rem;
     overflow: hidden;
-    
+    margin:1rem;
+    box-shadow: -4px 4px 5px rgba(116,68,177,0.2);
 }
 .graph{
     flex-basis: 0;

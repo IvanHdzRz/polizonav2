@@ -8,15 +8,29 @@ const fetchData= async()=>{
         //consulta datos desde el servidor
         const req=await fetch("http://polizona.com/mercado/22/php/financieros.php");
         const data=await req.json();
-        //caluclo de indicadores financieros
+        
+        //calculos de indicadores financieros
+        //calculo de los costos de mi empresa
         const materiaPrimaTotal=data.insumos.reduce((acc,insumo)=>parseInt(insumo.costo_total)+acc,0);
         const capacidadProduccion=Math.min( ...data.insumos.map(insumo=>parseInt (insumo.unidades)/parseInt( insumo.unidades_requeridas_por_producto)));
         const constoProduccionUnitario =data.insumos
             .reduce((acc,insumo)=>
                 parseFloat(insumo.costo_unitario_promedio)*parseFloat(insumo.unidades_requeridas_por_producto)+acc 
             ,0)
-
-        //quita el spinner de loading
+        
+        //calculo de los costos de mis proveedores   
+        //agrupando proveedores por el tipo de insumo que venden
+        const insumosUsados=[...new Set (data.insumos.map(insumo=>insumo.idalmacen))];
+        const costosProveedores=insumosUsados.map(id_insumo=>{
+            return {
+                id_insumo,
+                proveedores: data.costos_de_produccion_proveedores
+                    .filter(provData=>provData.id_insumo===id_insumo)
+            }
+        });
+        console.log(costosProveedores);
+        
+        //acabo el calculo oculta loader
         loader.style.display="none";
         
         //render, muestra html en base a calculo de indicadores
@@ -27,7 +41,7 @@ const fetchData= async()=>{
             </div>
             <section>
                 <h2 class="sectionTitle">
-                    Generales
+                    Mi empresa
                 </h2>
                 <div class="cardContainer">
                     ${cardFinantial("materia prima en almacen",`$ ${materiaPrimaTotal}`,"http://polizona.com/mercado/22/assets/tape 1.png")}
@@ -42,7 +56,18 @@ const fetchData= async()=>{
                             "graphComp",
                             `la empresa ${data.costos_de_produccion_competidores[0].id_competidor} presenta el costo de materia prima mas bajo de toda la ${data.industria[0].nbindustria} `)
                         }
-                        
+                        ${
+                            costosProveedores.map(provInfo=>{
+                                return (
+                                    cardMarket(
+                                        `proveedor mas barato para el ${provInfo.proveedores[0].nombre_insumo}`,
+                                        `${provInfo.proveedores[0].proveedor}`,
+                                        `charInsumo_${provInfo.id_insumo}`,
+                                        `el proveedor empresa ${provInfo.proveedores[0].proveedor} es el que cuenta con el costo de materia prima mas bajo de todos sus competidores`  
+                                    )
+                                )
+                            })
+                        }
                         
                     </div>
                 
@@ -74,6 +99,15 @@ const fetchData= async()=>{
             data.costos_de_produccion_competidores.map(comp=>comp.costo_de_produccion),
             data.costos_de_produccion_competidores.map(comp=>comp.id_competidor)
         );
+
+        costosProveedores.map(provInfo=>{
+            createGraph(
+                `charInsumo_${provInfo.id_insumo}`,
+                'costo de produccion',
+                provInfo.proveedores.map(prov=>prov.costo_de_produccion),
+                provInfo.proveedores.map(prov=>prov.proveedor),
+            )
+        })
 
         
         
@@ -127,7 +161,7 @@ function createGraph(idGraph,title,xData,yData){
                 labels: yData,
                 datasets: [{
                     label: title,
-                    backgroundColor: 'rgba(166,68,177,0.5)',
+                    backgroundColor: '#371F55',
                     borderColor: '#7444B1',
                     data: xData,
                     
