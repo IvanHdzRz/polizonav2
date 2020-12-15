@@ -163,6 +163,68 @@ body{
     border-radius: 10px;
   
 }
+/*indicadores fiinancieros*/
+
+.cardMarket{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    max-width: 45rem;
+    border-radius: .5rem;
+    overflow: hidden;
+    
+}
+.graph{
+    flex-basis: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
+    padding: 1rem;
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+.marketResult{
+    flex-basis: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
+    background-image: linear-gradient(to left top, #1c003f, #210643, #260c47, #2b124b, #30184f, #371d58, #3f2362, #46286b, #512f7c, #5d368d, #683d9f, #7444b1);
+    color: white;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: 2rem, auto;
+    gap: .5rem;
+    
+    justify-content: center;
+    align-items: center;
+}
+.marketResult>h3{
+    text-transform: capitalize;
+    grid-column: 1/4;
+    grid-row: 1/2;
+    font-weight: 600;
+    font-size: 1.3rem;
+    justify-self: flex-start;
+    margin: 0;
+}
+.marketResult>h2{
+    grid-column: 1/2;
+    grid-row: 2/3;
+    font-size: 4.5rem;
+    align-self: center;
+    justify-self: center;
+    margin: 0;
+}
+
+.marketResult>p{
+    grid-column: 2/4;
+    grid-row: 2/3;
+    color: rgba(255,255,255,0.5);
+    font-size: .8rem;
+    margin: 0;
+}
 @keyframes spin{
     from{
         transform: rotate(0deg);
@@ -190,3 +252,9 @@ body{
         opacity: 0;
     }
 }
+@media only screen and (min-width: 500px){
+    .cardMarket{
+        flex-direction: row;
+        
+    }
+} 
