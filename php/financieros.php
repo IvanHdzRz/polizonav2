@@ -63,39 +63,39 @@
     ';
 
     $queryCostosProveedores='
-    SELECT costos_prov.idempresa as proveedor , (emp.idindustria-4) as id_insumo,alm.nbtipoalmacen as nombre_insumo ,costos_prov.costo_de_produccion FROM(SELECT costos.idempresa, TRUNCATE((SUM(costos.costo_unitario_promedio*costos.unidades_requeridas_por_producto)),3) as costo_de_produccion
-    FROM
-    (select 
-      e.idempresa,e.idalmacen,tipoalmacen.nbtipoalmacen as insumo, sum(e.unidades) as "unidades",sum(e.costoembarque) as "costo_total",
-      (sum(e.costoembarque)/sum(e.unidades)) as "costo_unitario_promedio", prov.proveedor, 
-      prov.coeficiente as "unidades_requeridas_por_producto"
-     
-     from embarque as e
-     inner join tipoalmacen on e.idalmacen=tipoalmacen.idtipoalmacen
-     inner join 
-        (select (enc.idvendedora-4) as insumo, industria.nbindustria as proveedor,enc.coeficiente 
-         from encadenamiento as enc 
-         inner join industria on industria.idindustria=enc.idvendedora
-         where idcompradora= (select idindustria from empresa where idempresa=22)
-        ) as prov on  prov.insumo=e.idalmacen
-     
-     where e.idempresa in 
-     (
-      SELECT idempresa as proveedores FROM empresa where idindustria in (
-     select  industria.idindustria as id_proveedor 
-         from encadenamiento as enc 
-         inner join industria on industria.idindustria=enc.idvendedora
-         where idcompradora= (select idindustria from empresa where idempresa=22) 
-    ) && idempresa <=50 && idempresa !=22
-        
-     ) 
-     group by e.idalmacen, e.idempresa
-      order by e.idempresa) as costos
-      
-    group by costos.idempresa
-    order by costo_de_produccion) AS costos_prov
-    inner join empresa as emp on emp.idempresa= costos_prov.idempresa 
-    inner join tipoalmacen as alm on emp.idindustria-4=alm.idtipoalmacen;
+            SELECT cm.idempresa AS proveedor,em.idindustria,pivot.id_insumo,al.nbtipoalmacen AS nombre_insumo,TRUNCATE(SUM(cm.costo_medio*co.coeficiente),3) AS costo_de_produccion
+        FROM (
+            SELECT idempresa, idalmacen,  (SUM(costoembarque)/SUM(unidades)) as costo_medio
+            FROM embarque
+            GROUP BY idempresa,idalmacen
+        ) as cm
+        INNER JOIN empresa as em ON em.idempresa=cm.idempresa
+        INNER JOIN (
+        SELECT pivot.idcompradora,pivot.idvendedora, pivot.id_insumo,pivot.coeficiente 
+        FROM (
+            SELECT idcompradora,idvendedora, 
+            IF(idcompradora<5,idvendedora-idcompradora,
+            IF(idcompradora=5&& idvendedora=6,2,idvendedora)) 
+            as id_insumo,coeficiente 
+            FROM encadenamiento 
+        ) as pivot 
+        WHERE idcompradora in 
+        (SELECT idvendedora from encadenamiento WHERE idcompradora in 
+            (SELECT idindustria FROM empresa where idempresa=22 
+            ) 
+        )
+
+        ) as co ON co.idcompradora=em.idindustria && co.id_insumo=cm.idalmacen
+        INNER JOIN (
+        SELECT idcompradora,idvendedora, 
+            IF(idcompradora<5,idvendedora-idcompradora,
+            IF(idcompradora=5&& idvendedora=6,2,idvendedora)) 
+            as id_insumo,coeficiente FROM encadenamiento where idcompradora=(SELECT idindustria FROM empresa where idempresa=22 )
+        ) as pivot ON pivot.idvendedora=em.idindustria
+        INNER JOIN tipoalmacen AS al ON  pivot.id_insumo=al.idtipoalmacen
+        GROUP BY cm.idempresa
+        HAVING proveedor<=50
+        ORDER BY costo_de_produccion
     ';
 
     $insumosSet=mysqli_query($conexion,$queryInsumos);
