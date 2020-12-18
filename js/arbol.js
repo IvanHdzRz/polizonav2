@@ -74,8 +74,11 @@ const generatePage=async ()=>{
             const newTableSelected=e.target.value;
             optionTableSelected=tablas.map(tbl=>tbl.nombre).indexOf(newTableSelected);
             //se vuelven a llenar los selects con los valores de los campos de la tabla seleccionada
+            optionField1Selected=defaultOptionField1Selected;
+            optionField2Selected=defaultOptionField2Selected;
             selectField1.innerHTML=populateSelect(tablas[optionTableSelected].campos,defaultOptionField1Selected);
             selectField2.innerHTML=populateSelect(tablas[optionTableSelected].campos,defaultOptionField2Selected);
+            
     });
 
     //cuando se cambia de valor el select de campo 1 se comprueba que no tenga el mismo valor
