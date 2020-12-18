@@ -34,21 +34,27 @@ const generatePage=async ()=>{
                     <div class="controlWrapper">
                         <label for="select_field_1">Elije el primer nivel</label>
                         <select name="select_field_1" id="select_field_1">
-                            ${populateSelect(tablas[defaultOptionTableSelected].campos,defaultOptionField2Selected)}
+                            ${populateSelect(tablas[defaultOptionTableSelected].campos,defaultOptionField1Selected)}
                         </select>
                     </div>    
                         
                     <div class="controlWrapper">
                         <label for="select_field_2">Elije el segundo nivel</label>
                         <select name="select_field_2" id="select_field_2">
-                            ${populateSelect(tablas[defaultOptionTableSelected].campos,defaultOptionField1Selected)}
+                            ${populateSelect(tablas[defaultOptionTableSelected].campos,defaultOptionField2Selected)}
                         </select>
                     </div>
                 </div>  
                 <button id="btn_generar">Generar arbol </button>
             </form>
             <div id="arbol">
-
+                
+            </div>
+            <div class="codeContainers">
+                <div id="codeSql" class="codeEditor">
+                </div>
+                <div id="codeJson" class="codeEditor">
+                </div>
             </div> 
             
         </div>
@@ -109,6 +115,30 @@ const generatePage=async ()=>{
         `;
         const loader=document.getElementById('loaderTree');
         loader.scrollIntoView();
+        try{
+        const table=selectTable.value;
+        const field1=selectField1.value;
+        const field2=selectField2.value;
+        console.log(table);
+        const req= await fetch(`http://polizona.com/mercado/22/php/tree_generation.php?select_table=${table}&select_field_1=${field1}&select_field_2=${field2}`);
+        const responce=await req.json();
+        arbolDiv.innerHTML='';
+        const sqlCodeEditor=document.getElementById('codeSql');
+        const jsonCodeEditor=document.getElementById('codeJson');
+        
+        generateCodeMirror(
+            sqlCodeEditor,
+            `${responce.sqlGenerado.query1}
+            ${responce.sqlGenerado.query2}`,
+            'text/x-mysql'
+        );
+        generateCodeMirror(
+            jsonCodeEditor,
+            `${JSON.stringify({tabla:responce.tabla,nivel1:responce.nivel1,nivel2:responce.nivel2},null,'\t')}`,
+            'javascript'
+        );
+        
+        }catch(e){alert(e)}
     })
 
 }
@@ -140,5 +170,18 @@ function populateSelect(options,optionSelected=null){
 //cambia los valores seleccionados de los selects en caso de ser el mismo
 function changeOption(option,fieldCount){
     return option+1===fieldCount?0:option+1;
+}
+
+function generateCodeMirror(container,value,mode){
+        container.innerHTML="";
+        const codeEditor=CodeMirror(container,{
+        
+            value:value,
+            mode:mode,
+            theme:"seti",
+            lineNumbers:true,
+            styleActiveLine:true,
+           
+        });
 }
 //chale lo hubiera hecho en react :'v 

@@ -166,6 +166,11 @@ option{
     cursor: pointer;
     
 }
+.codeEditor{
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 3rem;
+}
 
 @keyframes spin{
     from{
