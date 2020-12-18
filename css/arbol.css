@@ -1,0 +1,193 @@
+:root{
+    --lightPurple: #7444B1;
+    --palePurple: #F5F3FF;
+    --darkPurple:#371F55;
+}
+html {
+    box-sizing: border-box;
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+body{
+    min-width: 100vw;
+    min-height: 100vh;
+    background-color: var(--palePurple);
+    margin: 0;
+    padding: 2rem;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+}
+.dasboardTitle{
+    text-transform: uppercase;
+    font-size: 2.5rem;
+    margin: 0;
+    color: #4F4F4F;
+    margin-bottom: 0;
+}
+#loader{
+    min-width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+    flex-direction: column;
+}
+.loadingMessage{
+    text-transform: uppercase;
+    font-weight: 300;
+    animation-name: banish;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+.spinner{
+    width: 20em;
+    height: 20em;
+/*     clip-path: polygon(100% 0, 50% 50%, 100% 100%, 0 100%, 0 0);
+ */    border-radius: 50%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation-name: spin;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    position: relative;
+    
+}
+.spinner::after{
+    content: ' ';
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(116,68,177,1) 0%, rgba(2,0,36,0) 100%);
+    position: absolute;
+    left: 0;
+    border-bottom-left-radius: 10em;
+    border-top-left-radius: 10em;
+}
+.spinner:before{
+    content: ' ' ;
+    height: 2.1rem;
+    width: 2.1rem;
+    border-radius: 50%;
+    position: absolute;
+    right: 50%;
+    top: 0;
+    transform: translate(50%, -0.5rem);
+    background-color: var(--lightPurple);
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    z-index: 20;
+    -webkit-transform: translate(50%, -0.5rem);
+    -moz-transform: translate(50%, -0.5rem);
+    -ms-transform: translate(50%, -0.5rem);
+    -o-transform: translate(50%, -0.5rem);
+}
+.innerSpinner{
+    height: 18em;
+    width: 18em;
+    background-color: var(--palePurple);
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    z-index: 10;
+}
+
+
+.form_tree{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    align-items: center;
+    margin-top: 3rem;
+}
+.controls{
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.controlWrapper{
+    display: flex;
+    flex-direction: column;
+    width: 90vw;
+    margin-block: 1rem;
+    padding:0 0.5rem;
+    max-width: 20rem;
+}
+select{
+    padding: 0.5rem;
+    text-transform: capitalize;
+    font-size: 1.3rem;
+    border-radius: 0.5rem;
+    background-color: var(--palePurple);
+    transition: box-shadow .3s;
+    font-weight: 300;
+}
+select:hover{
+    box-shadow: 0 0 5px 0 var(--lightPurple);
+}
+label{
+    color:var(--darkPurple);
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+option{
+    background-color: var(--palePurple);
+    color: var(--darkPurple);
+}
+#select_table{
+    font-weight: 600;
+    color: var(--darkPurple);
+    font-weight: 600;
+}
+#btn_generar{
+    border:none;
+    color:var(--palePurple);
+    font-weight: 300;
+    border-radius: 20px;
+    background-color: var(--darkPurple);
+    padding: 0.5rem 3rem;
+    font-size: 1.3rem;
+    margin-block: 2rem;
+    transition: box-shadow .3s;
+}
+#btn_generar:hover{
+    box-shadow: 0 0 5px 5px rgba(116,68,177,0.3);
+    cursor: pointer;
+    
+}
+
+@keyframes spin{
+    from{
+        transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+}
+}
+@keyframes banish{
+    0%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
