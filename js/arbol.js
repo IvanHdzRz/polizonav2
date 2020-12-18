@@ -22,7 +22,7 @@ const generatePage=async ()=>{
     dashboard.innerHTML=`
         <div class="treeWrap">
             
-            <form class="form_tree">
+            <form class="form_tree" id="form_tree" >
                 <div class="controls">
                     <div class="controlWrapper">
                         <label for="select_table">Elije una tabla</label>
@@ -46,7 +46,10 @@ const generatePage=async ()=>{
                     </div>
                 </div>  
                 <button id="btn_generar">Generar arbol </button>
-            </form> 
+            </form>
+            <div id="arbol">
+
+            </div> 
             
         </div>
     
@@ -57,6 +60,8 @@ const generatePage=async ()=>{
     const selectTable=document.getElementById('select_table');
     const selectField1=document.getElementById('select_field_1');
     const selectField2=document.getElementById('select_field_2');
+    const formTree=document.getElementById('form_tree');
+    const arbolDiv=document.getElementById('arbol');
 
     //al cambiar de tabla, se vuelven a llenar los selects de los campos
     selectTable.addEventListener('change',(e)=>{
@@ -91,6 +96,21 @@ const generatePage=async ()=>{
         }
 
     });
+
+    formTree.addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        arbolDiv.innerHTML=`
+            <div id="loaderTree">
+                <h3 class="loadingMessage">Generando arbol</h3>
+                <div class="spinner">
+                    <div class="innerSpinner"></div>
+                </div>
+            </div>
+        `;
+        const loader=document.getElementById('loaderTree');
+        loader.scrollIntoView();
+    })
+
 }
 
 generatePage();
