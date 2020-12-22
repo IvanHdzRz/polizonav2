@@ -128,7 +128,44 @@ const generatePage=async ()=>{
         arbolDiv.innerHTML='';
         const sqlCodeEditor=document.getElementById('codeSql');
         const jsonCodeEditor=document.getElementById('codeJson');
-        
+        /*codigo para insertar arbol de vis js*/
+        var nodes = new vis.DataSet([
+            { id: 1, label: "Raiz" },
+            { id: 2, label: "Nivel 1 A" },
+            { id: 3, label: "Nivel 1 B" },
+            { id: 4, label: "Nivel 2 A'" },
+            { id: 5, label: "Nivel 2 A'" },
+            { id: 6, label: "Nivel 2 B'" },
+            { id: 7, label: "Nivel 2 B'" }
+          ]);
+          
+          // create an array with edges
+          var edges = new vis.DataSet([
+            { from: 1, to: 3 },
+            { from: 1, to: 2 },
+            { from: 2, to: 4 },
+            { from: 2, to: 5 },
+            { from: 3, to: 6 },
+            { from: 3, to: 7 }
+          ]);
+          
+          // create a network
+          var container = arbolDiv;
+          var data = {
+            nodes: nodes,
+            edges: edges
+          };
+          var options = {
+            layout: {
+              hierarchical: {
+                enable: true,
+                direction: "UD",
+                sortMethod: "directed"
+              }
+            }
+          };
+          var network = new vis.Network(container, data, options);
+        /*termina codigo para insertar arbol*/ 
         generateCodeMirror(
             sqlCodeEditor,
             `${responce.sqlGenerado.query1}
