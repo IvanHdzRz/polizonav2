@@ -1,4 +1,8 @@
 'use strict'
+/*---------notas------------*/
+/*falta modularizar el codigo para hcerlo mas leible*/
+/*cuando se genera un arbol muy grande la pagina se vuelve lenta*/
+/*error */
 const loader=document.getElementById('loader');
 const dashboard=document.getElementById('dashboardData');
 
@@ -105,9 +109,10 @@ const generatePage=async ()=>{
         }
 
     });
-
+    //cuando se da click en 'generar arbol'
     formTree.addEventListener('submit', async (e)=>{
         e.preventDefault();
+        //carga indicador de carga
         arbolDiv.innerHTML=`
             <div id="loaderTree">
                 <h3 class="loadingMessage">Generando arbol</h3>
@@ -117,55 +122,90 @@ const generatePage=async ()=>{
             </div>
         `;
         const loader=document.getElementById('loaderTree');
+        //enfoca el indicador
         loader.scrollIntoView();
+        
         try{
         const table=selectTable.value;
         const field1=selectField1.value;
         const field2=selectField2.value;
-        console.log(table);
-        const req= await fetch(`http://polizona.com/mercado/22/php/tree_generation.php?select_table=${table}&select_field_1=${field1}&select_field_2=${field2}`);
+        
+        //trae la info del servidor
+        const req= await fetch(encodeURI(`http://polizona.com/mercado/22/php/tree_generation.php?select_table=${table}&select_field_1=${field1}&select_field_2=${field2}`));
+        console.log(`http://polizona.com/mercado/22/php/tree_generation.php?select_table=${table}&select_field_1=${field1}&select_field_2=${field2}`);
         const responce=await req.json();
-        arbolDiv.innerHTML='';
-        const sqlCodeEditor=document.getElementById('codeSql');
-        const jsonCodeEditor=document.getElementById('codeJson');
+       
+        
+        
+        
         /*codigo para insertar arbol de vis js*/
-        var nodes = new vis.DataSet([
-            { id: 1, label: "Raiz" },
-            { id: 2, label: "Nivel 1 A" },
-            { id: 3, label: "Nivel 1 B" },
-            { id: 4, label: "Nivel 2 A'" },
-            { id: 5, label: "Nivel 2 A'" },
-            { id: 6, label: "Nivel 2 B'" },
-            { id: 7, label: "Nivel 2 B'" }
+        const nodes = new vis.DataSet([
+            { id: 'root', label: `${responce.tabla}` },
+            ...responce.nivel1.map(n1=>{
+                const name=Object.keys(n1)[0];
+                return {
+                    id:`n1_${n1[name]}`,
+                    label:`${name} :${n1[name]} \n P: ${n1.probabilidad} `
+                }
+            }),
+            ...responce.nivel2.map(n2=>{
+                const [parent,name]=Object.keys(n2);
+                return {
+                    id:`n2_${n2[parent]}_${n2[name]}`,
+                    label:`${name} :${n2[name]} \n P: ${n2.probabilidad} `
+                }
+            }),
+            
           ]);
           
+        
           // create an array with edges
-          var edges = new vis.DataSet([
-            { from: 1, to: 3 },
-            { from: 1, to: 2 },
-            { from: 2, to: 4 },
-            { from: 2, to: 5 },
-            { from: 3, to: 6 },
-            { from: 3, to: 7 }
+        const edges = new vis.DataSet([
+            ...responce.nivel1.map(n1=>{
+                const name=Object.keys(n1)[0];
+                return {from:`root`,to:`n1_${n1[name]}`}
+            }),
+            ...responce.nivel2.map(n2=>{
+                const [parent,name]=Object.keys(n2);
+                return {
+                    to:`n2_${n2[parent]}_${n2[name]}`,
+                    from:`n1_${n2[parent]}`
+                }
+            }),  
+            
           ]);
           
           // create a network
-          var container = arbolDiv;
-          var data = {
+          const container = arbolDiv;
+          const data = {
             nodes: nodes,
             edges: edges
           };
-          var options = {
+          const options = {
+            edges:{ 
+                arrows:'to'
+            },
+            physics:{
+
+            },
             layout: {
               hierarchical: {
-                enable: true,
+                
                 direction: "UD",
                 sortMethod: "directed"
               }
             }
           };
-          var network = new vis.Network(container, data, options);
+        //borra todo lo que haya en el div
+        arbolDiv.innerHTML='';
+          //inserta diagrama de arbol
+        
+          const network = new vis.Network(container, data, options);
+          
         /*termina codigo para insertar arbol*/ 
+        /*muestra la respuesta en el editor de codigo*/
+        const sqlCodeEditor=document.getElementById('codeSql');
+        const jsonCodeEditor=document.getElementById('codeJson');
         generateCodeMirror(
             sqlCodeEditor,
             `${responce.sqlGenerado.query1}
@@ -178,7 +218,10 @@ const generatePage=async ()=>{
             'javascript'
         );
         
-        }catch(e){alert(e)}
+        }catch(e){
+            console.log(e);
+            arbolDiv.innerHTML='<h2>Ha ocurrido un error</h2>';
+        }
     })
 
 }

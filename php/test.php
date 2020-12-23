@@ -9,7 +9,7 @@
     $table=$_GET["select_table"];
     $field_1=$_GET["select_field_1"];
     $field_2=$_GET["select_field_2"];
-
+    
     $sql_1="
         SELECT {$field_1} , COUNT(*)/(SELECT COUNT(*) FROM {$table}) AS 'probabilidad'  
         FROM {$table} 
@@ -28,6 +28,7 @@
         ORDER BY {$field_1} , {$field_2};
     ";
 
+    
     $conexion = mysqli_connect($hostname_localhost,$username_localhost,$password_localhost,$database_localhost);
     mysqli_set_charset($conexion, "utf8");
 
@@ -40,7 +41,9 @@
         "nivel2"=>toArray($nivel2dataSet,$conexion)
     );
     
-    echo json_encode($responce,JSON_NUMERIC_CHECK);
+    
+    echo json_encode($responce);
+    
 
     function toArray($dataSet,$conexion){
         if ($conexion) {

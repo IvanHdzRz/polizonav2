@@ -171,7 +171,11 @@ option{
     border-radius: 10px;
     margin-bottom: 3rem;
 }
-
+#arbol{
+    height: 40rem;
+    border: 1px solid var(--darkPurple);
+    margin-bottom: 3rem;
+}
 @keyframes spin{
     from{
         transform: rotate(0deg);
