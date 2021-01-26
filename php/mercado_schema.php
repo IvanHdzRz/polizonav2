@@ -3,16 +3,17 @@
     header('Content-Type: application/json');
     $hostname_localhost ="68.70.164.26";
     $database_localhost ="information_schema";
-    $username_localhost ="polizona_lectura";
-    $password_localhost ="Polizona-1";
-    
+   /*  $username_localhost ="polizona_lectura";
+    $password_localhost ="Polizona-1"; */
+    $username_localhost ="polizona_22";
+    $password_localhost ="EL-22-me-toca";
     
     $conexion = mysqli_connect($hostname_localhost,$username_localhost,$password_localhost,$database_localhost);
     
     $queryTables= '
     SELECT TABLE_NAME as nombre_tabla
     FROM TABLES
-    WHERE TABLE_SCHEMA="polizona_mercado";
+    WHERE TABLE_SCHEMA="polizona_22";
     ';
 
     $tablesDataSet= mysqli_query($conexion,$queryTables);
@@ -33,7 +34,7 @@
                 $queryCampos='
                     SELECT COLUMN_NAME AS campos 
                     FROM COLUMNS 
-                    WHERE TABLE_SCHEMA = "polizona_mercado" AND TABLE_NAME ="'.$registro['nombre_tabla'].'"';
+                    WHERE TABLE_SCHEMA = "polizona_22" AND TABLE_NAME ="'.$registro['nombre_tabla'].'"';
                 
                 $camposDataSet =mysqli_query($conexion,$queryCampos);
                 
