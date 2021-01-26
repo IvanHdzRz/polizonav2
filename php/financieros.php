@@ -2,10 +2,12 @@
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
     $hostname_localhost ="68.70.164.26";
-    $database_localhost ="polizona_mercado";
+    /* $database_localhost ="polizona_mercado";
     $username_localhost ="polizona_lectura";
-    $password_localhost ="Polizona-1";
-    
+    $password_localhost ="Polizona-1"; */
+    $database_localhost ="polizona_22";
+    $username_localhost ="polizona_22";
+    $password_localhost ="EL-22-me-toca";
     
     $conexion = mysqli_connect($hostname_localhost,$username_localhost,$password_localhost,$database_localhost);
     
